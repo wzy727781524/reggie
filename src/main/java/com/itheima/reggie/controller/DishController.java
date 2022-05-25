@@ -20,6 +20,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -60,6 +61,8 @@ public class DishController {
     public R<String> save(@RequestBody DishDto dishDto) {
 
         dishService.saveWithFlavor(dishDto);
+        String key="dish_"+dishDto.getCategoryId()+"_1";
+        redisTemplate.delete(key);
         return R.success("新增菜品添加成功");
     }
 
@@ -213,9 +216,23 @@ public class DishController {
      */
     @PostMapping("status/0")
     public R<String> status0(Long[] ids) {
+        List<Long> categoryIds=new ArrayList<>();
+        //清理缓存
+        for (Long id : ids) {
+            Dish dish = dishService.getById(id);
+            categoryIds.add(dish.getCategoryId());
+        }
+
         LambdaUpdateWrapper<Dish> lw = new LambdaUpdateWrapper<>();
         lw.set(Dish::getStatus, 0).in(Dish::getId, ids);
         dishService.update(lw);
+
+        //清理所有菜品的缓存数据,来保持与数据库的数据一致
+        for (Long categoryId : categoryIds) {
+            String key="dish_"+categoryId+"_1";
+            redisTemplate.delete(key);
+        }
+
         return R.success("停售成功!");
     }
 
@@ -224,10 +241,23 @@ public class DishController {
      */
     @PostMapping("status/1")
     public R<String> status1(Long[] ids) {
+        List<Long> categoryIds=new ArrayList<>();
+        //清理缓存
+        for (Long id : ids) {
+            Dish dish = dishService.getById(id);
+            categoryIds.add(dish.getCategoryId());
+        }
+
         LambdaUpdateWrapper<Dish> lw = new LambdaUpdateWrapper<>();
 
         lw.set(Dish::getStatus, 1).in(Dish::getId, ids);
         dishService.update(lw);
+
+        for (Long categoryId : categoryIds) {
+            String key="dish_"+categoryId+"_1";
+            redisTemplate.delete(key);
+        }
+
         return R.success("启售成功!");
     }
 
@@ -236,8 +266,21 @@ public class DishController {
      */
     @DeleteMapping
     public R<String> deleteByid(Long[] ids) {
+        List<Long> categoryIds=new ArrayList<>();
+        //清理缓存
+        for (Long id : ids) {
+            Dish dish = dishService.getById(id);
+            categoryIds.add(dish.getCategoryId());
+        }
         dishService.removeByIds(Arrays.asList(ids));
+
+        for (Long categoryId : categoryIds) {
+            String key="dish_"+categoryId+"_1";
+            redisTemplate.delete(key);
+        }
+
         return R.success("删除成功!");
     }
+
 }
 
