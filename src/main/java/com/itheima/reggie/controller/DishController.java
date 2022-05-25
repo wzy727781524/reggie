@@ -208,6 +208,8 @@ public class DishController {
         }).collect(Collectors.toList());
         //如果不存在,需要查询数据库,缓存到Redis中
         redisTemplate.opsForValue().set(key,distDtoList,5, TimeUnit.MINUTES);
+
+
         return R.success(distDtoList);
     }
 
