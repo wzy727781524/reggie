@@ -12,6 +12,7 @@ import com.itheima.reggie.entity.DishFlavor;
 import com.itheima.reggie.service.CategoryService;
 import com.itheima.reggie.service.DishFlavorService;
 import com.itheima.reggie.service.DishService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,6 +34,7 @@ import java.util.stream.Collectors;
  * @author makejava
  * @since 2022-05-21 13:48:05
  */
+@Api(tags = "菜品相关接口")
 @RestController
 @RequestMapping("/dish")
 public class DishController {

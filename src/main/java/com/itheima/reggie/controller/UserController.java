@@ -6,6 +6,7 @@ import com.itheima.reggie.entity.User;
 import com.itheima.reggie.service.UserService;
 import com.itheima.reggie.utils.SMSUtils;
 import com.itheima.reggie.utils.ValidateCodeUtils;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ import java.util.concurrent.TimeUnit;
  * @since 2022-05-22 12:09:19
  */
 @Slf4j
+@Api(tags = "用户相关接口")
+
 @RestController
 @RequestMapping("/user")
 public class UserController {

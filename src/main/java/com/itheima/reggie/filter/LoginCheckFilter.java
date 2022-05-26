@@ -43,7 +43,12 @@ public class LoginCheckFilter implements Filter{
                 "/common/upload",
                 "/common/download",
                 "/user/sendMsg",
-                "/user/login"
+                "/user/login",
+                "/doc.html",
+                "webjars/**",
+                "/swagger-resources",
+                "/v2/api-docs",
+
         };
 
 

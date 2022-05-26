@@ -8,6 +8,7 @@ import com.itheima.reggie.common.BaseContext;
 import com.itheima.reggie.common.R;
 import com.itheima.reggie.entity.AddressBook;
 import com.itheima.reggie.service.AddressBookService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,8 @@ import java.util.List;
  * @since 2022-05-22 15:41:00
  */
 @Slf4j
+@Api(tags = "地址簿相关接口")
+
 @RestController
 @RequestMapping("/addressBook")
 public class AddressBookController {

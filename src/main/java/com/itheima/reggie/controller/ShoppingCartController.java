@@ -7,6 +7,7 @@ import com.itheima.reggie.common.BaseContext;
 import com.itheima.reggie.common.R;
 import com.itheima.reggie.entity.ShoppingCart;
 import com.itheima.reggie.service.ShoppingCartService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,8 @@ import java.util.List;
  * @since 2022-05-23 13:21:21
  */
 @Slf4j
+@Api(tags = "购物车相关接口")
+
 @RestController
 @RequestMapping("/shoppingCart")
 public class ShoppingCartController {

@@ -8,6 +8,7 @@ import com.itheima.reggie.common.BaseContext;
 import com.itheima.reggie.common.R;
 import com.itheima.reggie.entity.Orders;
 import com.itheima.reggie.service.OrdersService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,8 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@Api(tags = "订单相关接口")
+
 @RequestMapping("order")
 public class OrdersController extends ApiController {
     /**
